@@ -5,7 +5,21 @@ const cors = require("cors");
 const nodemailer = require("nodemailer"); // nodemailer is use for transporting what was gooten to email
 
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = [
+  "https://ssterlingapp.pages.dev",
+  "https://ssterlingapp.netlify.app"
+];
+
+app.use(cors({
+  origin: function(origin, callback){
+    if(!origin) return callback(null, true); // allow non-browser requests
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = "The CORS policy for this site does not allow access from the specified Origin.";
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 const PORT = process.env.PORT || 5000; // port to connect to WEB
 
@@ -147,4 +161,5 @@ app.post("/security", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
 });
+
 
