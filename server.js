@@ -6,8 +6,7 @@ const nodemailer = require("nodemailer"); // nodemailer is use for transporting 
 
 app.use(express.json());
 const allowedOrigins = [
-  "https://ssterlingapp.pages.dev",
-  "https://ssterlingapp.netlify.app"
+"https://websterlingg.vercel.app"
 ];
 
 app.use(cors({
@@ -161,6 +160,7 @@ app.post("/security", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
 });
+
 
 
 
